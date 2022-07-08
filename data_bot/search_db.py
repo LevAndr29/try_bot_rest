@@ -24,6 +24,8 @@ def names_category():
     for cat in search:
         id_categ.append(cat[0])
         name_categ.append(cat[1])
+    file.commit()
+    file.close()
     return id_categ, name_categ
 def id_names_dish(category=0):
     try:
@@ -41,6 +43,8 @@ def id_names_dish(category=0):
     for cat in search:
         id_dish.append(cat[0])
         name_dish.append(cat[1])
+    file.commit()
+    file.close()
     return id_dish, name_dish
 
 def is_order(id_client, mode=0):
@@ -55,6 +59,8 @@ def is_order(id_client, mode=0):
         table = search[1]
         search = loads(search[0])
     except:
+        file.commit()
+        file.close()
         return 'Вы ещё не добавили блюда'
     dishs = search['order']
     order = ''
@@ -68,4 +74,6 @@ def is_order(id_client, mode=0):
         text = 'Новый заказ:\n' + order + f'\nОбщая стоимость: {price}\nстолик: {table}'
         return text
     text = 'Ваш заказ:\n' + order + f'\nОбщая стоимость: {price}\nПодтвердить заказ?'
+    file.commit()
+    file.close()
     return text

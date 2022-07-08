@@ -10,6 +10,8 @@ def create_datas():
     try:
         file = sqlite3.connect(data_b)  # Создание или подключение к бд
     except:
+        file.commit()
+        file.close()
         print('База уже открыта (ошибка)')
     if file:
         print('Data base connected OK!')

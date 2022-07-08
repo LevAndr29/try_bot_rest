@@ -57,6 +57,8 @@ def add_in_order(id_client, time, dish):
     try:
         order_now = json.loads(cur.fetchone()[0])
     except:
+        file.commit()
+        file.close()
         return 'Вначале выберите столик.'
     order_now['order'].append(dish)
     order_now['time'] = time
