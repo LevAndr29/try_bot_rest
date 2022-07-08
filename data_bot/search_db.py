@@ -17,7 +17,6 @@ def names_category():
     if search is None or search[1] is None:
         file.close()
         return -1
-    file.close()
     id_categ, name_categ = [], []
     for cat in search:
         id_categ.append(cat[0])
@@ -35,7 +34,6 @@ def id_names_dish(category=0):
     if search is None:
         file.close()
         return -1
-    file.close()
     id_dish, name_dish = [], []
     for cat in search:
         id_dish.append(cat[0])
