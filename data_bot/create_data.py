@@ -5,9 +5,13 @@ import sqlite3
 
 
 dir_path = Path.cwd()
-data_b = str(Path(dir_path, 'data_bot', 'restauran_data.db'))
+data_b = str(Path(dir_path, 'restauran_data.db'))
 def create_datas():
-    file = sqlite3.connect(data_b)  # Создание или подключение к бд
+    try:
+        file = sqlite3.connect(data_b)  # Создание или подключение к бд
+        cur = file.cursor()
+    except:
+        print('База уже открыта (ошибка)')
     if file:
         print('Data base connected OK!')
     file.execute('''CREATE TABLE IF NOT EXISTS "order_tab" ("id_order"	INTEGER NOT NULL UNIQUE,	"data"	TEXT NOT NULL,	

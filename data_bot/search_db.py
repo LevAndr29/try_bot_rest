@@ -1,12 +1,10 @@
 import sqlite3
 from pathlib import Path
 from json import loads
-from random import randint
-from collections import Counter
 
 
 dir_path = Path.cwd()
-data_b = str(Path(dir_path, 'data_bot', 'restauran_data.db'))
+data_b = str(Path(dir_path, 'restauran_data.db'))
 
 def names_category():
     try:
@@ -24,7 +22,6 @@ def names_category():
     for cat in search:
         id_categ.append(cat[0])
         name_categ.append(cat[1])
-    file.commit()
     file.close()
     return id_categ, name_categ
 def id_names_dish(category=0):

@@ -13,7 +13,7 @@ import random
 
 
 dir_path = Path.cwd()
-data_b = str(Path(dir_path, 'data_bot', 'restauran_data.db'))  #
+data_b = str(Path(dir_path, 'restauran_data.db'))  #
 
 def add_dish(dish_name, description, price, view, photo='zero'):
     try:
@@ -21,6 +21,7 @@ def add_dish(dish_name, description, price, view, photo='zero'):
         cur = file.cursor()
     except:
         print('База уже открыта (ошибка)')
+        file.close()
         return
     cur.execute(f"SELECT * FROM menu WHERE '{dish_name}'=dish_name;")
     c = cur.fetchone()
