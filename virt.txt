@@ -1,0 +1,12 @@
+Создание виртуального окружения
+
+python -m venv venv
+
+Активация виртуального окружения
+
+venv\Scripts\activate
+
+Установка aiogram
+
+pip install aiogram
+
