@@ -2,12 +2,12 @@ from aiogram.utils import executor  # для запуска в онлайн
 from create_bot import dp
 import logging
 
-from data_bot.create_data import create_data
+from data_bot.create_data import create_datas
 from handlers.client import register_handlers_common
 
 
 async def on_startup(_):
-    create_data()
+    create_datas()
     logging.basicConfig(
         # filename='errors.txt',
         level=logging.INFO,
