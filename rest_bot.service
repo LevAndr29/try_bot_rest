@@ -6,8 +6,8 @@ After=network.target
 User=lev
 Group=lev
 
-WorkingDirectory=/home/Lev/try_bot_rest/
-Environment="PYTHONPATH=/home/Lev/try_bot_rest/"
+WorkingDirectory=/home/lev/try_bot_rest/
+Environment="PYTHONPATH=/home/lev/try_bot_rest/"
 ExecStart=/home/lev/try_bot_rest/.venv/bin/python3.8 /home/lev/try_bot_rest/main.py
 
 [Install]
