@@ -3,8 +3,8 @@ Description=Telegram Bot
 After=network.target
 
 [Service]
-User=Lev
-Group=Lev
+User=lev
+Group=lev
 
 WorkingDirectory=/home/Lev/try_bot_rest/
 Environment="PYTHONPATH=/home/Lev/try_bot_rest/"

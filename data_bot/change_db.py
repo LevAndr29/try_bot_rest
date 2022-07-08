@@ -54,7 +54,10 @@ def add_in_order(id_client, time, dish):
         print ('База уже открыта (ошибка)')
     # print(table)
     cur.execute(f"SELECT order_now FROM tables WHERE id_client='{id_client}';")
-    order_now = json.loads(cur.fetchone()[0])
+    try:
+        order_now = json.loads(cur.fetchone()[0])
+    except:
+        return 'Вначале выберите столик.'
     order_now['order'].append(dish)
     order_now['time'] = time
     # print(order_now)
