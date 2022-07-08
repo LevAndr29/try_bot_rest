@@ -6,7 +6,7 @@ import sqlite3
 
 dir_path = Path.cwd()
 data_b = str(Path(dir_path, 'data_bot', 'restauran_data.db'))
-def create_data():
+def create_datas():
     try:
         file = sqlite3.connect(data_b)  # Создание или подключение к бд
     except:
@@ -28,7 +28,7 @@ def create_data():
                         "name_category"	TEXT NOT NULL UNIQUE,   "json_category"	TEXT);''')
     file.commit()
     file.close()
-create_data()
+create_datas()
 def add_tables(num):
     try:
         file = sqlite3.connect(data_b)  # Создание или подключение к бд
