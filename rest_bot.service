@@ -1,0 +1,14 @@
+[Unit]
+Description=Telegram Bot
+After=network.target
+
+[Service]
+User=Lev
+Group=Lev
+
+WorkingDirectory=/home/Lev/try_bot_rest/
+Environment="PYTHONPATH=/home/Lev/try_bot_rest/"
+ExecStart=/home/lev/try_bot_rest/.venv/bin/python3.8 /home/lev/try_bot_rest/main.py
+
+[Install]
+WantedBy=multi-user.target
