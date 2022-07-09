@@ -17,6 +17,7 @@ class Dish(StatesGroup):
     step_one = State()
     step_two = State()
     step_table = State()
+    clean_table = State()
     start_time = State()
     step_player = State()
 
@@ -42,9 +43,9 @@ async def add_dish_table(query: types.CallbackQuery, state: FSMContext):
     time_date = {}
     time_date['data'] = time_order[:10]
     time_date['time'] = time_order[11:16]
-    print(add_in_order(id_client=query.from_user.id, time=time_date, dish=dish))
+    text = add_in_order(id_client=query.from_user.id, time=time_date, dish=dish)
     print(query.from_user.id)
-    await bot.send_message(query.from_user.id, f'Блюдо добавлено')
+    await bot.send_message(query.from_user.id, text)
     await query.message.delete()
     await state.finish()
 
@@ -77,13 +78,27 @@ async def client_table(query: types.CallbackQuery, state: FSMContext):
     await bot.send_message(query.from_user.id, change_id_client_table(id_client=query.from_user.id, table=int(text)))
     await query.message.delete()
     await state.finish()
+
+
+async def clean_table(message: types.Message):
+    await message.answer(f'Выберите столик:', reply_markup=Keyboard.choise_table())
+    await Dish.clean_table.set()
+async def clear_table(query: types.CallbackQuery, state: FSMContext):
+    text = query.data.lower()
+    print(text, 'text')
+    await bot.send_message(query.from_user.id, change_id_client_table(id_client=0, table=int(text)))
+    await query.message.delete()
+    await state.finish()
+
 def register_handlers_common(dp: Dispatcher):
     dp.register_message_handler(cmd_start, commands="start", state="*")
+    dp.register_message_handler(clean_table, commands="clean_table", state="*")
     dp.register_message_handler(new_dish, Text(equals="Добавить блюдо", ignore_case=True), state="*")
     dp.register_message_handler(choise_table, Text(equals="Выбрать столик", ignore_case=True), state="*")
     dp.register_callback_query_handler(order_add, Text(equals="order_add", ignore_case=True), state="*")
     dp.register_callback_query_handler(you_right, Text(equals="false", ignore_case=True), state="*")
     dp.register_message_handler(new_order, Text(equals="Сделать заказ", ignore_case=True), state="*")
+    dp.register_callback_query_handler(clear_table, state=Dish.clean_table)
     dp.register_callback_query_handler(after_category, state=Dish.step_one)
     dp.register_callback_query_handler(add_dish_table, state=Dish.step_two)
     dp.register_callback_query_handler(client_table, state=Dish.step_table)
